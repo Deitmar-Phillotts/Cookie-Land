@@ -11,36 +11,40 @@ To flood the market with remarkable cookie flavors. To build my cookie Empire. F
 ## Flow Chart to Explain Purchase from Cookie Land
 
 ```mermaid
+
+
 erDiagram
-    CUSTOMER ||--|| "PAYMENT TYPE" : "Debit/Credit Card"
-    "PAYMENT TYPE" ||--o{ COOKIES : "select"
-    COOKIES }|--|| RETAIL : "Ingredient/Material"
-    RETAIL }|--|| PROFIT : "Preferred pricing"
-    PROFIT ||--|| "BAKERS & OTHER STAFF" : "BusinessOverhead"
-    PROFIT ||--o{ COOKIES : "Develop New Flavors"
+    CUSTOMER ||--|| PAYMENT_TYPE : "Debit/Credit Card"
+    PAYMENT_TYPE ||--o{ COOKIE_CHOICE : "customer selection"
+    COOKIE_CHOICE }|--|| COOKIE_PRODUCTION : "Ingredient/Material"
+    COOKIE_PRODUCTION }|--|{ COOKIE_CHOICE : "customer selection"
+    RETAIL_STORE }|--|| PROFIT : "Preferred pricing Options"
+    PROFIT ||--o{ BAKERS_OTHER_STAFF_UTILITIES : "BusinessOverhead"
+    BAKERS_OTHER_STAFF_UTILITIES ||--|{ COOKIE_PRODUCTION : "Develop New Flavors"
     CUSTOMER {
         string customerid PK
-        customerid name
-        customerid email
-    }
-    
-    "PAYMENT TYPE" {
-        string customerID PK
         string name
-        string cardNumber
-        string paymentType
+        string email
+        string address
+        string cardinfo 
+
     }
     
-    COOKIES {
+    "PAYMENT_TYPE" {
+        string customerID PK
+        string cardNumber
+        }
+    
+    COOKIE_CHOICE {
         string customerID PK
         string flavor
         string quantity
     }
     
-    ENTITY {
-        string name
+    note {
+        
     }
     
-    note right of ENTITY
-        note content
+   
+       
     end
