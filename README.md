@@ -12,28 +12,35 @@ To flood the market with remarkable cookie flavors. To build my cookie Empire. F
 
 ```mermaid
 erDiagram
-
-Customer ||--|| Payment : transaction
-Payment ||--o{ Product : select
-Payment }|--|| Profit : BusinessGrowth
-Product }|--|| Retail : CookieLand
-Retail ||--|| Profit : CheapProduct
-CUSTOMER {
-        string customerID PK
-        string name
-        string email
+    CUSTOMER ||--|| "PAYMENT TYPE" : "Debit/Credit Card"
+    "PAYMENT TYPE" ||--o{ COOKIES : "select"
+    COOKIES }|--|| RETAIL : "Ingredient/Material"
+    RETAIL }|--|| PROFIT : "Preferred pricing"
+    PROFIT ||--|| "BAKERS & OTHER STAFF" : "BusinessOverhead"
+    PROFIT ||--o{ COOKIES : "Develop New Flavors"
+    CUSTOMER {
+        string customerid PK
+        customerid name
+        customerid email
     }
     
-PAYMENT {
+    "PAYMENT TYPE" {
         string customerID PK
         string name
-        string paymenttype
+        string cardNumber
+        string paymentType
     }
-    PRODUCT {
+    
+    COOKIES {
         string customerID PK
         string flavor
         string quantity
-}
-
-```
-thus it begins
+    }
+    
+    ENTITY {
+        string name
+    }
+    
+    note right of ENTITY
+        note content
+    end
